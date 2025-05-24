@@ -1,5 +1,6 @@
 {
-  "hpMax": 180,
-  "hpLimiteOver": 360,
-  "initUIPosition": 100
+  "hp_max": 180,
+  "hp_limite_over": 360,
+  "init_ui_position_x": 100.0,
+  "init_ui_position_y": 100.0
 }
