@@ -3,8 +3,6 @@
 #include <fstream>
 #include<nlohmann/json.hpp>
 
-// 書き直し必須！！
-
 //templateでどの型でも使えるようにする
 template<typename T>
 
@@ -13,15 +11,6 @@ inline T LoadData(const std::string& fileName)
 {
 	//jsonファイルを開く
 	std::ifstream stream(fileName);
-
-	//エラー処理
-	if (!stream.is_open())
-		throw new std::exception("Failed open file.");
-	if (!nlohmann::json::accept(stream))
-		throw new std::exception("jsonのフォーマットが不正");
-
-	/*nlohmann::json j;
-	stream >> j;*/
 
 	//例外処理?らしい
 	try
@@ -35,7 +24,10 @@ inline T LoadData(const std::string& fileName)
 	}
 	catch (const std::exception&)
 	{
-		stream.close();	//パースしたら閉じておｋ
-		return T{};
+		//エラー処理(trychach文の中に入れる)
+		if (!stream.is_open())
+			throw std::runtime_error("Failed open file.");
+		if (!nlohmann::json::accept(stream))
+			throw std::runtime_error("jsonのフォーマットが不正");
 	}
 }
