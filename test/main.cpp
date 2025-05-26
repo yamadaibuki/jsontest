@@ -36,14 +36,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	int currentHp = 0;
 
-
-	//不具合:LoadDataを使わずにこっちを使うと正常に動く。なんで？？？？
-	std::ifstream stream("data.json");
-	JsonData jsonData = nlohmann::json::parse(stream).get<JsonData>();
-
-	//不具合:正常に動かずプログラムの途中で落ちる。parseエラー。nlohmannJson.hがどっかおかしいんやろな
 	//jsonデータ用の構造体変数にデータを読み込み。templateの<>で型をjsonデータ用の構造体にする
-	//JsonData jsonData = LoadData<JsonData>("data.json");
+	JsonData jsonData = LoadData<JsonData>("data.json");
 
 	VECTOR position = VGet(jsonData.initUIPositionX, jsonData.initUIPositionY, 0.0);
 
