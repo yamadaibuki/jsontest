@@ -1,25 +1,6 @@
 #include "DxLib.h"
 #include "nlohmannJson.h"
 
-//jsonデータ用の構造体
-struct JsonData
-{
-	int		hpMax;
-	int		hpLimitOver;
-	float	initUIPositionX;
-	float	initUIPositionY;
-};
-
-//任意の型変換(第一引数→nlohmannjson、第二引数→jsonのデータ)
-inline void from_json(const nlohmann::json& json, JsonData& jsondata)
-{
-	//at("")でデータの要素を指定してget_toで指定した要素の中身（数値など)をget_toの引数の変数に代入する
-	json.at("hp_max").get_to(jsondata.hpMax);
-	json.at("hp_limit_over").get_to(jsondata.hpLimitOver);
-	json.at("init_ui_position_x").get_to(jsondata.initUIPositionX);
-	json.at("init_ui_position_y").get_to(jsondata.initUIPositionY);
-}
-
 //hp描画関数
 void DrawHP(int hp, int hpMax, VECTOR initPosition)
 {
